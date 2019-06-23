@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from config.constants import *
 from common import *
 import math
-
+import os
 _result = []
 _url = ""
 _method = ""
@@ -93,9 +93,13 @@ def step_impl(context):
       err.append(["The two prices is not equal for " + stock["symbol"],
         arr, round(float(stock["price"]),2)])
 
-    browser.quit()
     if err != []:
       errors.append(err)
+      if not os.path.exists("./errors_screanshots"):
+        os.makedirs("./errors_screanshots")
+      browser.save_screenshot("./errors_screanshots/"+ time.strftime( "%-S_%M_%H_%d_%m_%Y")+ " yahooStockPage.png")
+    browser.quit()
+
     counter += 1
   if errors != []:
     assert False, errors

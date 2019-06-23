@@ -1,4 +1,3 @@
-
 from behave import *
 import requests
 import json
@@ -10,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from config.constants import *
 from common import *
-
+import os
 
 # TODO: replace the next variables with an object of custom class
 _url = ""
@@ -68,6 +67,7 @@ def step_impl(context):
 
       if type(asteroid["absolute_magnitude_h"]) != float:
           err.append('asteroid in index ' + str(counter) + ' dose not have absolute_magnitude_h')
+
       minDiameterInkilometers = asteroid["estimated_diameter"]["kilometers"]["estimated_diameter_min"] 
       maxDiameterInkilometers = asteroid["estimated_diameter"]["kilometers"]["estimated_diameter_max"]
       if minDiameterInkilometers > maxDiameterInkilometers :
@@ -75,7 +75,6 @@ def step_impl(context):
 
       diameterFromKMetarsToMeters = round(asteroid["estimated_diameter"]["kilometers"]["estimated_diameter_min"]*1000, 5)
       diameterInMeters = round(asteroid["estimated_diameter"]["meters"]["estimated_diameter_min"], 5)
-
       if  diameterFromKMetarsToMeters != diameterInMeters:
           err.append('asteroid in index ' + str(counter) + ' dose not have the same distance in m and km')
 
@@ -138,9 +137,12 @@ def step_impl(context):
             err.append(['asteroid in the index of  ' + str(counter) +
                         "  in the api array dose not have the same inclination in UI", str(inclination), str(asteroidFullData["orbital_data"]["inclination"])])
 
-        browser.quit()
         if err != []:
             errors.append(err)
+            if not os.path.exists("./errors_screanshots"):
+                os.makedirs("./errors_screanshots")
+            browser.save_screenshot("./errors_screanshots/"+ time.strftime( "%-S_%M_%H_%d_%m_%Y")+ " nasaAsteroidePage.png")
+        browser.quit()
         counter += 1
 
     if errors != []:
