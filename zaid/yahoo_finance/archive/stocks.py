@@ -1,1 +1,1 @@
-[{u'symbol': u'SNAP', u'time': 1560966643514, u'price': 14.625, u'size': 100}, {u'symbol': u'FB', u'time': 1560966580671, u'price': 185.3, u'size': 2}]
+[{'symbol': 'SNAP', 'price': 14.565, 'size': 100, 'time': 1561147194109}, {'symbol': 'FB', 'price': 191.14, 'size': 100, 'time': 1561147199675}]

@@ -13,6 +13,14 @@ class Common:
         browser = webdriver.Chrome(executable_path="./bin/chromedriver", chrome_options=chrome_options)
         return browser
 
+    @classmethod
+    def firefox(*args):
+        options = webdriver.FirefoxOptions()
+        for arg in ARGUMENTS:
+            options.add_argument(arg)
+        browser = webdriver.Firefox(executable_path='./bin/PATH/geckodriver', firefox_options=options )
+        return browser
+
 
 class archiveResponse :
 
