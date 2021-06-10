@@ -6,7 +6,7 @@ chardet==3.0.4
 colorama==0.4.1
 cucumber-tag-expressions==1.1.1
 decorator==4.4.0
-Django==1.11.20
+Django==2.2.24
 enum34==1.1.6
 idna==2.8
 jsonpath-rw==1.4.0
